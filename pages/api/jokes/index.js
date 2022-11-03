@@ -1,9 +1,11 @@
 import db from "../../../db.json";
+import { getAllJokes } from "../../../helpers/db";
 
-function handler(request, response) {
+async function handler(request, response) {
   console.log(request.method);
   if (request.method === "GET") {
-    response.status(200).json(db);
+    const jokes = await getAllJokes();
+    response.status(200).json(jokes);
   } else {
     response
       .status(405)
